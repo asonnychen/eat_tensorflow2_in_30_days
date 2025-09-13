@@ -1,5 +1,6 @@
 from logger import log
 import os
+os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
 
 import numpy as np
 import pandas as pd
@@ -22,7 +23,6 @@ def show_data():
     train_csv = read_csv('../data/titanic/train.csv')
     dftrain_raw = train_csv.head(10)
     log.info(dftrain_raw)
-
     ax = train_csv['Survived'].value_counts().plot(kind='bar', figsize=(12, 8), fontsize=15, rot=0)
     ax.set_ylabel('Counts', fontsize=15)
     ax.set_xlabel('Survived', fontsize=15)

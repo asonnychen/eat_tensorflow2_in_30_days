@@ -62,15 +62,15 @@ class Logger:
         # log_dir 目录，如果不存在则创建
         self.__check_dirs(log_dir)
 
-        self.COLOR_MAP = {DEBUG: Fore.BLUE, INFO: Fore.GREEN, WARNING: Fore.YELLOW, ERROR: Fore.RED, CRITICAL: Fore.RED + Style.BRIGHT}  # 蓝色  # 绿色  # 黄色  # 红色  # 亮红色
+        # self.COLOR_MAP = {DEBUG: Fore.BLUE, INFO: Fore.GREEN, WARNING: Fore.YELLOW, ERROR: Fore.RED, CRITICAL: Fore.RED + Style.BRIGHT}  # 蓝色  # 绿色  # 黄色  # 红色  # 亮红色
 
         
-        color = self.COLOR_MAP.get(self.print_level, Fore.RESET)
+        # color = self.COLOR_MAP.get(self.print_level, Fore.RESET)
 
         
         # %(funcName)s，函数名
         # %(filename)s:%(lineno)d，文件名:行号
-        self.formatter = f'{color}[ %(asctime)s ][ %(filename)s:%(lineno)d ][ %(levelname)s ] \n%(message)s'
+        self.formatter = f'{Fore.YELLOW}[ %(asctime)s ][ %(filename)s:%(lineno)d ][ %(levelname)s ] \n%(message)s'
 
     def __get_logger(self):
         formatter = Formatter(self.formatter)
