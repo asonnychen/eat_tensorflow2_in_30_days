@@ -1,7 +1,7 @@
 from logger import log
 import os
 
-os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
+# os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -27,10 +27,11 @@ def read_csv():
 # label分布情况
 
 
-def show_survived(train_csv):
+def show_survived():
     '''
     展示数据
     '''
+    train_csv = pd.read_csv(path_join('../data/titanic/train.csv'))
     ax = train_csv['Survived'].value_counts().plot(kind='bar', figsize=(12, 8), fontsize=15, rot=0)
     ax.set_ylabel('Counts', fontsize=15)
     ax.set_xlabel('Survived', fontsize=15)
@@ -38,10 +39,11 @@ def show_survived(train_csv):
 
 
 # 年龄分布情况
-def show_age(train_csv):
+def show_age():
     '''
     展示数据
-    '''
+    '''    
+    train_csv = pd.read_csv(path_join('../data/titanic/train.csv'))
     ax = train_csv['Age'].plot(kind='hist', bins=20, color='purple', figsize=(12, 8), fontsize=15)
     ax.set_ylabel('Frequency', fontsize=15)
     ax.set_xlabel('Age', fontsize=15)
@@ -49,10 +51,11 @@ def show_age(train_csv):
 
 
 # 年龄和label的相关性
-def show_age_survived(train_csv):
+def show_age_survived():
     '''
     展示数据
     '''
+    train_csv = pd.read_csv(path_join('../data/titanic/train.csv'))
     ax = train_csv.query('Survived == 0')['Age'].plot(kind='density', figsize=(12, 8), fontsize=15)
     train_csv.query('Survived == 1')['Age'].plot(kind='density', figsize=(12, 8), fontsize=15)
     ax.legend(['Survived==0', 'Survived==1'], fontsize=12)
@@ -100,6 +103,7 @@ def def_models():
     tf.keras.backend.clear_session()
 
     model = tfk.models.Sequential()
+    pass
     model.add(tfk.layers.Dense(20, activation='relu', input_shape=(15,)))
     model.add(tfk.layers.Dense(10, activation='relu'))
     model.add(tfk.layers.Dense(1, activation='sigmoid'))
@@ -143,9 +147,11 @@ def main():
     log.info(f"x_train.shape ={x_train.shape}")
     log.info(f"x_test.shape ={x_test.shape}")
 
+    
     model = def_models()
     history = train_model(model, x_train, y_train)
 
+    pass
     model_path = path_join('../my_data/keras_model.keras')
     model.save(model_path)
     plot_metric(history, "loss")
@@ -158,4 +164,6 @@ def main():
 
 
 if __name__ == "__main__":
+    # print(tf.config.list_physical_devices('GPU'))
     main()
+    pass
